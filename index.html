@@ -3,79 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StyleScraper - Descubre tendencias en tiempo real</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>SportsScraper | Comparador Brutalista</title>
     <link rel="stylesheet" href="css/style.css">
-
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <span class="logo-icon">
-                    <i class="material-icons">shopping_bag</i>
-                </span>
-                <span class="logo-text">StyleScraper</span>
-            </div>
-            <div class="navbar-buttons">
-                <a href="registro.html" class="btn-signup">Registrarse</a>
-                <a href="login.html" class="btn-login">Iniciar Sesión</a>
-            </div>
-        </div>
-    </nav>
+    <!-- HEADER: CU1 - Search Interface -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo">Sports<span>Scraper</span></div>
 
-    <!-- Hero Section -->
+            <div class="search-bar-wrapper">
+                <div class="search-bar">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="BUSCAR PRODUCTOS..."
+                        aria-label="Buscador de productos"
+                        autocomplete="off"
+                    >
+                    <button class="search-btn" aria-label="Ejecutar búsqueda">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"/></svg>
+                    </button>
+                </div>
+                <div id="search-suggestions" class="search-suggestions">
+                    <div class="suggestions-content"></div>
+                </div>
+            </div>
+
+            <nav class="header-nav">
+                <button class="brutal-btn button-login">LOGIN</button>
+            </nav>
+        </div>
+    </header>
+
     <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Descubre tendencias en
-                <span class="gradient-text">tiempo real</span>
-            </h1>
-            <p class="hero-subtitle">
-                Analiza precios, detecta oportunidades y compara productos de las principales tiendas 
-                de moda en una sola plataforma unificada.
+        <h1>COMPARA PRECIOS<br>SIN RODEOS</h1>
+        <p>Sistema de metabúsqueda en tiempo real para retail deportivo</p>
+    </section>
+
+    <main class="container">
+        <!-- ANALYTICS SECTION -->
+        <section aria-labelledby="analytics-title">
+            <div class="section-title" id="analytics-title">
+                <span>ANALÍTICA DE PRECIOS</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2 id="chart-title">Selecciona un producto para ver su historial</h2>
+                    <div class="neon-badge">Live Data</div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS/CATALOG SECTION -->
+        <section aria-labelledby="catalog-title">
+            <div class="section-title" id="catalog-title">
+                <span>CATÁLOGO DE OFERTAS</span>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Search Results Status -->
+            <div id="search-status" class="search-status" style="display: none;">
+                <p id="search-status-text"></p>
+            </div>
+
+            <!-- Products Grid Container -->
+            <div id="product-grid" class="product-grid">
+                <!-- Products will be rendered here by script.js -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-state-content">
+                    <h3>No hay resultados</h3>
+                    <p>Intenta con otras palabras clave o categorías</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container" style="padding: 0;">
+            <div class="logo" style="margin-bottom: 1rem;">Sports<span>Scraper</span></div>
+            <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #888;">
+                &copy; 2024 PROYECTO DE METABÚSQUEDA Y COMPARACIÓN DE PRECIOS.<br>
+                DISEÑADO PARA EL SECTOR RETAIL TEXTIL DEPORTIVO EN COLOMBIA.
             </p>
-            <div class="hero-buttons">
-                <a href="productos.html" class="btn-primary">Comenzar Ahora →</a>
-                <a href="productos.html" class="btn-secondary">Ver Demo</a>
-            </div>
         </div>
-    </section>
+    </footer>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="features-container">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="material-icons">search</i>
-                </div>
-                <h3 class="feature-title">Búsqueda Inteligente</h3>
-                <p class="feature-description">
-                    Rastrea miles de productos simultáneamente en múltiples tiendas online.
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="material-icons">bar_chart</i>
-                </div>
-                <h3 class="feature-title">Análisis de Mercado</h3>
-                <p class="feature-description">
-                    Visualiza estadísticas de precios y tendencias para tomar mejores decisiones.
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="material-icons">inventory_2</i>
-                </div>
-                <h3 class="feature-title">Catálogo Unificado</h3>
-                <p class="feature-description">
-                    Accede a un inventario centralizado con filtros avanzados y categorización automática.
-                </p>
-            </div>
-        </div>
-    </section>
+    <script src="js/script.js"></script>
 </body>
 </html>
