@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsScraper | Comparador Brutalista</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- HEADER: CU1 - Search Interface -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo">Sports<span>Scraper</span></div>
+
+            <div class="search-bar-wrapper">
+                <div class="search-bar">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="BUSCAR PRODUCTOS..."
+                        aria-label="Buscador de productos"
+                        autocomplete="off"
+                    >
+                    <button class="search-btn" aria-label="Ejecutar búsqueda">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"/></svg>
+                    </button>
+                </div>
+                <div id="search-suggestions" class="search-suggestions">
+                    <div class="suggestions-content"></div>
+                </div>
+            </div>
+
+            <nav class="header-nav">
+                <button class="brutal-btn button-login">LOGIN</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>COMPARA PRECIOS<br>SIN RODEOS</h1>
+        <p>Sistema de metabúsqueda en tiempo real para retail deportivo</p>
+    </section>
+
+    <main class="container">
+        <!-- ANALYTICS SECTION -->
+        <section aria-labelledby="analytics-title">
+            <div class="section-title" id="analytics-title">
+                <span>ANALÍTICA DE PRECIOS</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2 id="chart-title">Selecciona un producto para ver su historial</h2>
+                    <div class="neon-badge">Live Data</div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS/CATALOG SECTION -->
+        <section aria-labelledby="catalog-title">
+            <div class="section-title" id="catalog-title">
+                <span>CATÁLOGO DE OFERTAS</span>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Search Results Status -->
+            <div id="search-status" class="search-status" style="display: none;">
+                <p id="search-status-text"></p>
+            </div>
+
+            <!-- Products Grid Container -->
+            <div id="product-grid" class="product-grid">
+                <!-- Products will be rendered here by script.js -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-state-content">
+                    <h3>No hay resultados</h3>
+                    <p>Intenta con otras palabras clave o categorías</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container" style="padding: 0;">
+            <div class="logo" style="margin-bottom: 1rem;">Sports<span>Scraper</span></div>
+            <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #888;">
+                &copy; 2024 PROYECTO DE METABÚSQUEDA Y COMPARACIÓN DE PRECIOS.<br>
+                DISEÑADO PARA EL SECTOR RETAIL TEXTIL DEPORTIVO EN COLOMBIA.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
