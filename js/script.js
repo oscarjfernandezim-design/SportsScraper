@@ -159,6 +159,8 @@ function init() {
   setupSearchListeners();
   updateStatistics();
   setupModalListeners();
+  initializeAlerts();
+  setupAlertListeners();
 }
 
 // ========================================
@@ -400,6 +402,11 @@ function openPriceModal(productId) {
   // Renderizar histórico de precios
   renderPriceHistory(productId);
 
+  // Renderizar alertas de precio (CU3)
+  renderAlertForm(productId);
+  renderActiveAlerts(productId);
+  checkPriceAlerts(productId);
+
   // Abrir modal
   document.getElementById('priceModal').style.display = 'flex';
 }
@@ -568,10 +575,6 @@ function setupModalListeners() {
     }
   });
 }
-
-// ========================================
-// AUTHENTICATION HANDLERS
-// ========================================
 
 function setupAuthListeners() {
   // LOGIN FORM
@@ -880,3 +883,286 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial navigation
   router.navigate();
 });
+=======
+// PRICE ALERTS (CU3)
+// ========================================
+let currentProductId = null;
+let editingAlertId = null;
+
+function initializeAlerts() {
+  // Cargar alertas al iniciar
+  const alerts = getAlerts();
+  if (alerts.length > 0) {
+    document.getElementById('bellButton')?.classList.add('active');
+  }
+}
+
+function getAlerts() {
+  try {
+    const stored = localStorage.getItem('sportsscraper_alerts');
+    return stored ? JSON.parse(stored) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveAlertsToStorage(alerts) {
+  try {
+    localStorage.setItem('sportsscraper_alerts', JSON.stringify(alerts));
+  } catch (e) {
+    console.error('Error guardando alertas:', e);
+  }
+}
+
+function getProductAlerts(productId) {
+  const alerts = getAlerts();
+  return alerts.filter(a => a.productId === productId && a.enabled);
+}
+
+function saveAlert(productId, targetPrice,stores, alertIdToEdit = null) {
+  if (!productId || !targetPrice || targetPrice <= 0) {
+    alert('Por favor ingresa un precio válido');
+    return false;
+  }
+
+  const alerts = getAlerts();
+  const timestamp = new Date().toISOString();
+
+  if (alertIdToEdit) {
+    // Editar alerta existente
+    const index = alerts.findIndex(a => a.id === alertIdToEdit);
+    if (index !== -1) {
+      alerts[index] = {
+        ...alerts[index],
+        targetPrice: parseFloat(targetPrice),
+        stores: stores,
+        updatedAt: timestamp
+      };
+    }
+  } else {
+    // Crear nueva alerta
+    alerts.push({
+      id: 'pa_' + Date.now(),
+      productId: productId,
+      targetPrice: parseFloat(targetPrice),
+      stores: stores,
+      enabled: true,
+      createdAt: timestamp,
+      triggered: false
+    });
+  }
+
+  saveAlertsToStorage(alerts);
+  showPriceNotification('¡Alerta guardada exitosamente!', 'success');
+  return true;
+}
+
+function deleteAlert(alertId) {
+  if (!confirm('¿Estás seguro de que deseas eliminar esta alerta?')) return;
+
+  const alerts = getAlerts().filter(a => a.id !== alertId);
+  saveAlertsToStorage(alerts);
+  renderActiveAlerts(currentProductId);
+  updateBellIcon();
+  showPriceNotification('Alerta eliminada', 'success');
+}
+
+function toggleAlertActive(alertId) {
+  const alerts = getAlerts();
+  const alert = alerts.find(a => a.id === alertId);
+  if (alert) {
+    alert.enabled = !alert.enabled;
+    saveAlertsToStorage(alerts);
+    renderActiveAlerts(currentProductId);
+    updateBellIcon();
+  }
+}
+
+function editAlert(alertId) {
+  const alerts = getAlerts();
+  const alert = alerts.find(a => a.id === alertId);
+  if (!alert) return;
+
+  editingAlertId = alertId;
+  document.getElementById('targetPrice').value = alert.targetPrice;
+
+  // Des-seleccionar todos los checkboxes
+  document.querySelectorAll('.store-checkbox input').forEach(cb => cb.checked = false);
+
+  // Seleccionar los checkboxes del alerta
+  if (alert.stores.length > 0) {
+    alert.stores.forEach(storeId => {
+      const checkbox = document.querySelector(`input[value="${storeId}"]`);
+      if (checkbox) checkbox.checked = true;
+    });
+  }
+
+  document.getElementById('toggleAlertForm').click();
+  document.getElementById('targetPrice').focus();
+}
+
+function renderAlertForm(productId) {
+  currentProductId = productId;
+  const form = document.getElementById('alertForm');
+  const toggleBtn = document.getElementById('toggleAlertForm');
+
+  // Renderizar checkboxes de tiendas
+  const storesContainer = document.getElementById('storeCheckboxes');
+  storesContainer.innerHTML = '';
+  STORES.forEach(store => {
+    const label = document.createElement('label');
+    label.className = 'store-checkbox';
+    label.innerHTML = `
+      <input type="checkbox" value="${store.id}">
+      <span>${store.name}</span>
+    `;
+    storesContainer.appendChild(label);
+  });
+
+  // Event listeners
+  toggleBtn.addEventListener('click', () => {
+    const isVisible = form.style.display !== 'none';
+    form.style.display = isVisible ? 'none' : 'flex';
+    toggleBtn.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
+  });
+
+  document.getElementById('cancelAlert').addEventListener('click', () => {
+    form.style.display = 'none';
+    editingAlertId = null;
+    document.getElementById('targetPrice').value = '';
+    document.querySelectorAll('.store-checkbox input').forEach(cb => cb.checked = false);
+    toggleBtn.style.transform = 'rotate(0deg)';
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const targetPrice = document.getElementById('targetPrice').value;
+    const selectedStores = Array.from(document.querySelectorAll('.store-checkbox input:checked'))
+      .map(cb => cb.value);
+
+    if (saveAlert(productId, targetPrice, selectedStores, editingAlertId)) {
+      form.reset();
+      form.style.display = 'none';
+      toggleBtn.style.transform = 'rotate(0deg)';
+      editingAlertId = null;
+      renderActiveAlerts(productId);
+      updateBellIcon();
+    }
+  });
+}
+
+function renderActiveAlerts(productId) {
+  const alerts = getProductAlerts(productId);
+  const container = document.getElementById('activeAlerts');
+  const list = document.getElementById('alertsList');
+
+  if (alerts.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'block';
+  list.innerHTML = '';
+
+  alerts.forEach(alert => {
+    const storeNames = alert.stores.length > 0
+      ? STORES.filter(s => alert.stores.includes(s.id)).map(s => s.name).join(', ')
+      : 'Todas las tiendas';
+
+    const item = document.createElement('div');
+    item.className = 'alert-item';
+    item.innerHTML = `
+      <div class="alert-item-info">
+        <strong>Precio objetivo:</strong> €${alert.targetPrice.toFixed(2)}<br>
+        <strong>Tiendas:</strong> ${storeNames}
+      </div>
+      <div class="alert-item-actions">
+        <button class="alert-btn" onclick="editAlert('${alert.id}')">EDITAR</button>
+        <button class="alert-btn" onclick="toggleAlertActive('${alert.id}')">${alert.enabled ? 'DESACTIVAR' : 'ACTIVAR'}</button>
+        <button class="alert-btn delete" onclick="deleteAlert('${alert.id}')">ELIMINAR</button>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function updateBellIcon() {
+  const allAlerts = getAlerts();
+  const activeAlerts = allAlerts.filter(a => a.enabled);
+  const bellIcon = document.getElementById('bellButton');
+
+  if (activeAlerts.length > 0) {
+    bellIcon.classList.add('active');
+    bellIcon.setAttribute('data-count', activeAlerts.length);
+  } else {
+    bellIcon.classList.remove('active');
+    bellIcon.setAttribute('data-count', '');
+  }
+}
+
+function checkPriceAlerts(productId) {
+  const alerts = getProductAlerts(productId);
+  const offers = OFFERS.filter(o => o.productId === productId);
+
+  if (offers.length === 0) return;
+
+  const lowestPrice = Math.min(...offers.map(o => o.price));
+
+  alerts.forEach(alert => {
+    if (lowestPrice <= alert.targetPrice && !alert.triggered) {
+      const storeName = alert.stores.length > 0
+        ? STORES.filter(s => alert.stores.includes(s.id)).map(s => s.name).join(', ')
+        : 'algunas tiendas';
+
+      showPriceNotification(
+        `¡Alerta! El precio bajó a €${lowestPrice.toFixed(2)} en ${storeName}`,
+        'alert'
+      );
+
+      // Marcar alerta como disparada
+      const allAlerts = getAlerts();
+      const idx = allAlerts.findIndex(a => a.id === alert.id);
+      if (idx !== -1) {
+        allAlerts[idx].triggered = true;
+        saveAlertsToStorage(allAlerts);
+      }
+    }
+  });
+}
+
+function showPriceNotification(message, type = 'success') {
+  const notification = document.getElementById('priceAlertNotification');
+  const messageEl = document.getElementById('notificationMessage');
+  const closeBtn = document.getElementById('closeNotification');
+
+  messageEl.textContent = message;
+  notification.className = 'price-alert-notification';
+  if (type === 'alert') {
+    notification.classList.add('warning');
+  }
+
+  notification.style.display = 'flex';
+
+  closeBtn.addEventListener('click', () => {
+    notification.style.display = 'none';
+  }, { once: true });
+
+  setTimeout(() => {
+    if (notification.style.display !== 'none') {
+      notification.style.display = 'none';
+    }
+  }, 5000);
+}
+
+function setupAlertListeners() {
+  const bellButton = document.getElementById('bellButton');
+
+  bellButton.addEventListener('click', () => {
+    const form = document.getElementById('alertForm');
+    const isVisible = form.style.display !== 'none';
+    form.style.display = isVisible ? 'none' : 'flex';
+    document.getElementById('toggleAlertForm').style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
