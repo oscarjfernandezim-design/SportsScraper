@@ -102,8 +102,12 @@
             <div style="flex: 1;"></div>
 
             <div style="position: relative;">
-                <input type="number" id="priceFilter" class="sort-btn" placeholder="Precio máx." style="background: white; flex: 0 1 120px; padding: 0.6rem;">
+                <input type="number" id="priceFilter" class="sort-btn" placeholder="Precio máx." style="background: white; flex: 0 1 120px; padding: 0.6rem;" min="0" max="500" step="10">
             </div>
+
+            <button id="resetFiltersBtn" class="sort-btn" style="background: white; border: 2px solid #ff4444; color: #ff4444; padding: 0.6rem 1rem; display: none;">
+                ✕ LIMPIAR
+            </button>
         </section>
 
         <!-- RESULTS/CATALOG SECTION -->

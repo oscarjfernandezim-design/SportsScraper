@@ -232,6 +232,7 @@ function setupSortAndFilterListeners() {
   // Categories button and dropdown
   const categoriesBtn = document.getElementById('categoriesBtn');
   const categoriesDropdown = document.getElementById('categoriesDropdown');
+  const resetBtn = document.getElementById('resetFiltersBtn');
 
   // Get unique categories
   const categories = ['TODOS', ...new Set(PRODUCTS.map(p => p.category))];
@@ -251,6 +252,7 @@ function setupSortAndFilterListeners() {
       document.querySelectorAll('#categoriesDropdown .dropdown-item').forEach(i => i.classList.remove('active'));
       item.classList.add('active');
       applyFilterAndSort();
+      updateResetButton();
       categoriesDropdown.classList.remove('active');
     });
   });
@@ -280,6 +282,27 @@ function setupSortAndFilterListeners() {
   priceFilter.addEventListener('change', (e) => {
     currentMaxPrice = e.target.value ? parseFloat(e.target.value) : Infinity;
     applyFilterAndSort();
+    updateResetButton();
+  });
+
+  // Reset filters button
+  resetBtn.addEventListener('click', () => {
+    currentCategory = '';
+    currentMaxPrice = Infinity;
+    currentSort = 'featured';
+    currentSearch = '';
+
+    document.getElementById('searchInput').value = '';
+    document.getElementById('priceFilter').value = '';
+
+    document.querySelectorAll('#categoriesDropdown .dropdown-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('#sortDropdown .dropdown-item').forEach(i => i.classList.remove('active'));
+
+    categoriesDropdown.querySelector('[data-category=""]')?.classList.add('active');
+    sortDropdown.querySelector('[data-sort="featured"]')?.classList.add('active');
+
+    applyFilterAndSort();
+    updateResetButton();
   });
 
   // Close dropdowns when clicking outside
@@ -293,6 +316,12 @@ function setupSortAndFilterListeners() {
   // Set default active items
   categoriesDropdown.querySelector('[data-category=""]')?.classList.add('active');
   sortDropdown.querySelector('[data-sort="featured"]')?.classList.add('active');
+}
+
+function updateResetButton() {
+  const resetBtn = document.getElementById('resetFiltersBtn');
+  const hasFilters = currentCategory || currentMaxPrice !== Infinity || currentSearch;
+  resetBtn.style.display = hasFilters ? 'block' : 'none';
 }
 
 function applyFilterAndSort() {
@@ -448,9 +477,10 @@ function renderProducts(productsToRender) {
   const grid = document.getElementById('product-grid');
   grid.innerHTML = '';
 
-  productsToRender.forEach(product => {
+  productsToRender.forEach((product, index) => {
     const card = document.createElement('div');
     card.className = 'brutal-card';
+    card.style.animationDelay = `${index * 0.05}s`;
     card.addEventListener('click', () => {
       openPriceModal(product.id);
     });
@@ -458,20 +488,35 @@ function renderProducts(productsToRender) {
     const bestOffer = OFFERS.filter(o => o.productId === product.id).sort((a, b) => a.price - b.price)[0];
     const priceDisplay = bestOffer ? `${bestOffer.price} ${bestOffer.currency}` : `${product.basePrice} EUR`;
 
+    // Calcular descuento aproximado
+    let discountBadge = '';
+    if (bestOffer && bestOffer.price < product.basePrice * 0.9) {
+      const discount = Math.round(((product.basePrice - bestOffer.price) / product.basePrice) * 100);
+      discountBadge = `<span class="card-badge">-${discount}% OFF</span>`;
+    }
+
     card.innerHTML = `
+      ${discountBadge}
       <img src="${product.image}" alt="${product.name}" referrerPolicy="no-referrer">
       <div class="neon-badge">${product.brand}</div>
       <h3>${product.name}</h3>
       <p>${product.category}</p>
       <div class="brutal-card-footer">
         <span class="brutal-card-price">${priceDisplay}</span>
-        <button class="brutal-card-btn" aria-label="Comparar precios">
-          COMPARAR PRECIOS
+        <button class="brutal-card-btn" aria-label="Comparar precios" title="Comparar precios">
+          <span style="font-size: 0.8rem;">→</span>
         </button>
       </div>
     `;
     grid.appendChild(card);
   });
+
+  // Show/hide empty state
+  if (productsToRender.length === 0) {
+    showEmptyState();
+  } else {
+    hideEmptyState();
+  }
 }
 
 // ========================================
