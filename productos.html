@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos - StyleScraper</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/productos.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">
+                    <i class="material-icons">shopping_bag</i>
+                </span>
+                <span class="logo-text">StyleScraper</span>
+            </div>
+            <div class="navbar-buttons">
+                <a href="login.html" class="btn-login">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="products-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>
+                    <i class="material-icons">tune</i>
+                    Filtros
+                </h3>
+            </div>
+
+            <div class="search-box">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" placeholder="Buscar...">
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-header">
+                    <h4>Categoría</h4>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="filter-options">
+                    <label class="checkbox-option checked">
+                        <input type="checkbox" checked>
+                        <span>Todas</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox">
+                        <span>Vestidos</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox">
+                        <span>Camisas</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox">
+                        <span>Pantalones</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox">
+                        <span>Zapatos</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox">
+                        <span>Chaquetas</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox">
+                        <span>Accesorios</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox">
+                        <span>Faldas</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="user-section">
+                <div class="user-avatar">
+                    <i class="material-icons">account_circle</i>
+                </div>
+                <div class="user-info">
+                    <h4>Usuario Demo</h4>
+                    <p>oscar@gmail</p>
+                </div>
+            </div>
+
+            <a href="login.html" class="btn-logout">
+                <i class="material-icons">logout</i>
+                Cerrar Sesión
+            </a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Comparador de Precios -->
+            <section class="compare-panel">
+                <div class="compare-top">
+                    <div>
+                        <p class="section-label">Comparador de Precios</p>
+                        <h2>Encuentra el mejor precio en 7 tiendas</h2>
+                    </div>
+                    <button type="button" class="close-card" aria-label="Cerrar comparador">
+                        <i class="material-icons">close</i>
+                    </button>
+                </div>
+
+                <p class="compare-subtitle">Explora la oferta más competitiva en moda femenina con opciones online y en tienda física.</p>
+
+                <div class="compare-badges">
+                    <span class="pill pill-online"><i class="material-icons">language</i> Disponible Online</span>
+                    <span class="pill pill-store"><i class="material-icons">storefront</i> Disponible en Tienda Física</span>
+                </div>
+
+                <div class="compare-details">
+                    <div class="compare-card compare-summary">
+                        <div class="compare-card-top">
+                            <div class="image-thumb">
+                                <img src="https://via.placeholder.com/180x220?text=Vestido" alt="Vestido Floral de Verano">
+                            </div>
+                            <div class="compare-main-info">
+                                <h3>Vestido Floral de Verano</h3>
+                                <p class="product-meta">Vestidos • Mujer • Verano • Casual</p>
+                                <div class="tag-group">
+                                    <span>Vestidos</span>
+                                    <span>Mujer</span>
+                                    <span>Verano</span>
+                                    <span>Casual</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-metrics">
+                        <div class="metric-card metric-low">
+                            <span class="metric-label">Mínimo</span>
+                            <strong>30.80€</strong>
+                        </div>
+                        <div class="metric-card metric-average">
+                            <span class="metric-label">Promedio</span>
+                            <strong>51.28€</strong>
+                        </div>
+                        <div class="metric-card metric-high">
+                            <span class="metric-label">Máximo</span>
+                            <strong>81.78€</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="compare-store-header">
+                    <h3>Disponible en 7 tiendas</h3>
+                    <span class="store-status"><i class="material-icons">trending_down</i> 5 bajaron</span>
+                </div>
+
+                <div class="store-list">
+                    <div class="store-item store-best">
+                        <div>
+                            <div class="store-name">Adidas</div>
+                            <div class="store-meta"><i class="material-icons">language</i> Online · Hace 1 semana</div>
+                        </div>
+                        <div class="store-actions">
+                            <span class="price-badge">¡MEJOR PRECIO!</span>
+                            <span class="store-price">30.80€</span>
+                            <a class="btn-view" href="#">Ver</a>
+                        </div>
+                    </div>
+
+                    <div class="store-item">
+                        <div>
+                            <div class="store-name">Zara</div>
+                            <div class="store-meta"><i class="material-icons">storefront</i> Tienda · Hace 2 días</div>
+                        </div>
+                        <div class="store-actions">
+                            <span class="store-price">34.20€</span>
+                            <a class="btn-view" href="#">Ver</a>
+                        </div>
+                    </div>
+
+                    <div class="store-item">
+                        <div>
+                            <div class="store-name">Mango</div>
+                            <div class="store-meta"><i class="material-icons">language</i> Online · Hace 10 horas</div>
+                        </div>
+                        <div class="store-actions">
+                            <span class="store-price">36.40€</span>
+                            <a class="btn-view" href="#">Ver</a>
+                        </div>
+                    </div>
+
+                    <div class="store-item">
+                        <div>
+                            <div class="store-name">Pull&Bear</div>
+                            <div class="store-meta"><i class="material-icons">storefront</i> Tienda · Hace 4 días</div>
+                        </div>
+                        <div class="store-actions">
+                            <span class="store-price">39.10€</span>
+                            <a class="btn-view" href="#">Ver</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="products-section">
+                <div class="section-header">
+                    <h2>Productos Destacados</h2>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x250?text=Blazer" alt="Blazer Elegante">
+                        </div>
+                        <div class="product-info">
+                            <h3>Blazer Elegante...</h3>
+                            <p class="brand">Zara</p>
+                            <p class="price">149.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x250?text=Sudadera" alt="Sudadera con capucha">
+                        </div>
+                        <div class="product-info">
+                            <h3>Sudadera con C...</h3>
+                            <p class="brand">Adidas</p>
+                            <p class="price">65.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x250?text=Falda" alt="Falda plisada elegante">
+                        </div>
+                        <div class="product-info">
+                            <h3>Falda Plisada Ele...</h3>
+                            <p class="brand">Mango</p>
+                            <p class="price">54.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x250?text=Shorts" alt="Shorts denim">
+                        </div>
+                        <div class="product-info">
+                            <h3>Shorts Denim C...</h3>
+                            <p class="brand">Bershka</p>
+                            <p class="price">29.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x250?text=Sudadera" alt="Sudadera streetwear">
+                        </div>
+                        <div class="product-info">
+                            <h3>Sudadera Street...</h3>
+                            <p class="brand">Pull&Bear</p>
+                            <p class="price">49.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x250?text=Bolso" alt="Bolso de cuero">
+                        </div>
+                        <div class="product-info">
+                            <h3>Bolso de Cuero ...</h3>
+                            <p class="brand">Massimo Dutti</p>
+                            <p class="price">179.99€</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recently Added -->
+            <section class="products-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="material-icons">new_releases</i>
+                    </div>
+                    <div>
+                        <h2>Recién Llegados</h2>
+                        <p>Las últimas novedades en moda</p>
+                    </div>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge">NUEVO</span>
+                            <img src="https://via.placeholder.com/200x250?text=Gafas" alt="Gafas de sol">
+                        </div>
+                        <div class="product-info">
+                            <h3>Gafas de Sol Avi...</h3>
+                            <p class="brand">Zara</p>
+                            <p class="price">99.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge">NUEVO</span>
+                            <img src="https://via.placeholder.com/200x250?text=Traje" alt="Traje formal completo">
+                        </div>
+                        <div class="product-info">
+                            <h3>Traje Formal Co...</h3>
+                            <p class="brand">Massimo Dutti</p>
+                            <p class="price">299.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge">NUEVO</span>
+                            <img src="https://via.placeholder.com/200x250?text=Conjunto" alt="Conjunto deportivo">
+                        </div>
+                        <div class="product-info">
+                            <h3>Conjunto Depor...</h3>
+                            <p class="brand">Nike</p>
+                            <p class="price">79.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge">NUEVO</span>
+                            <img src="https://via.placeholder.com/200x250?text=Abrigo" alt="Abrigo de lana">
+                        </div>
+                        <div class="product-info">
+                            <h3>Abrigo de Lana ...</h3>
+                            <p class="brand">Zara</p>
+                            <p class="price">189.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge">NUEVO</span>
+                            <img src="https://via.placeholder.com/200x250?text=Pantalon" alt="Pantalón chino">
+                        </div>
+                        <div class="product-info">
+                            <h3>Pantalón Chino ...</h3>
+                            <p class="brand">Uniqlo</p>
+                            <p class="price">44.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge">NUEVO</span>
+                            <img src="https://via.placeholder.com/200x250?text=Vestido" alt="Vestido de noche elegante">
+                        </div>
+                        <div class="product-info">
+                            <h3>Vestido de Noch...</h3>
+                            <p class="brand">Stradivarius</p>
+                            <p class="price">139.99€</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Last Opportunity -->
+            <section class="products-section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="material-icons">schedule</i>
+                    </div>
+                    <div>
+                        <h2>Última Oportunidad</h2>
+                        <p>¡Últimas unidades disponibles!</p>
+                    </div>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge urgent">¡ÚLTIMAS!</span>
+                            <img src="https://via.placeholder.com/200x250?text=Prenda1" alt="Prenda de edición limitada">
+                        </div>
+                        <div class="product-info">
+                            <h3>Prenda Limited...</h3>
+                            <p class="brand">Zara</p>
+                            <p class="price">89.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge urgent">¡ÚLTIMAS!</span>
+                            <img src="https://via.placeholder.com/200x250?text=Prenda2" alt="Prenda exclusiva">
+                        </div>
+                        <div class="product-info">
+                            <h3>Prenda Exclusiv...</h3>
+                            <p class="brand">Adidas</p>
+                            <p class="price">129.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge urgent">¡ÚLTIMAS!</span>
+                            <img src="https://via.placeholder.com/200x250?text=Prenda3" alt="Prenda especial">
+                        </div>
+                        <div class="product-info">
+                            <h3>Prenda Special...</h3>
+                            <p class="brand">Nike</p>
+                            <p class="price">159.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge urgent">¡ÚLTIMAS!</span>
+                            <img src="https://via.placeholder.com/200x250?text=Prenda4" alt="Prenda de tendencia">
+                        </div>
+                        <div class="product-info">
+                            <h3>Prenda Trend...</h3>
+                            <p class="brand">Mango</p>
+                            <p class="price">99.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge urgent">¡ÚLTIMAS!</span>
+                            <img src="https://via.placeholder.com/200x250?text=Prenda5" alt="Prenda única">
+                        </div>
+                        <div class="product-info">
+                            <h3>Prenda Única...</h3>
+                            <p class="brand">Pull&Bear</p>
+                            <p class="price">74.99€</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card"><a href="#product-modal" class="product-card-link" aria-label="Abrir detalles de producto"></a>
+                        <div class="product-image">
+                            <span class="badge urgent">¡ÚLTIMAS!</span>
+                            <img src="https://via.placeholder.com/200x250?text=Prenda6" alt="Prenda premium">
+                        </div>
+                        <div class="product-info">
+                            <h3>Prenda Premium...</h3>
+                            <p class="brand">Uniqlo</p>
+                            <p class="price">119.99€</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="product-modal" class="product-modal">
+        <div class="product-modal-card">
+            <a href="#" class="product-modal-close" aria-label="Cerrar detalle">×</a>
+            <div class="modal-content-grid">
+                <div class="modal-image-block">
+                    <img src="https://via.placeholder.com/320x420?text=Vestido" alt="Vestido Floral de Verano">
+                </div>
+                <div class="modal-info-block">
+                    <div class="modal-header">
+                        <h2>Vestido Floral de Verano</h2>
+                        <p class="modal-meta">Vestidos • Mujer • Verano • Casual</p>
+                    </div>
+                    <div class="modal-tags">
+                        <span>Vestidos</span>
+                        <span>Mujer</span>
+                        <span>Verano</span>
+                        <span>Casual</span>
+                    </div>
+                    <div class="modal-pricing">
+                        <div>
+                            <span>Mínimo</span>
+                            <strong>30.80€</strong>
+                        </div>
+                        <div>
+                            <span>Promedio</span>
+                            <strong>51.28€</strong>
+                        </div>
+                        <div>
+                            <span>Máximo</span>
+                            <strong>81.78€</strong>
+                        </div>
+                    </div>
+                    <div class="modal-store-list">
+                        <h3>Disponible en 7 tiendas</h3>
+                        <div class="modal-store-item">
+                            <span>Adidas</span>
+                            <strong>30.80€</strong>
+                        </div>
+                        <div class="modal-store-item">
+                            <span>Zara</span>
+                            <strong>34.20€</strong>
+                        </div>
+                        <div class="modal-store-item">
+                            <span>Mango</span>
+                            <strong>36.40€</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

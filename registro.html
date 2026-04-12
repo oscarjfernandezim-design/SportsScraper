@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - StyleScraper</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Left Section -->
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <h1>Únete a nosotros</h1>
+                <p>Crea tu cuenta y comienza a descubrir tendencias</p>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="auth-right">
+            <div class="auth-form-container">
+                <div class="auth-header">
+                    <div class="auth-logo">
+                        <i class="material-icons">shopping_bag</i>
+                    </div>
+                    <h2>Registrarse</h2>
+                </div>
+
+                <form class="auth-form" action="productos.html" method="get">
+                    <div class="form-group">
+                        <label for="fullname">Nombre Completo</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <input type="text" id="fullname" placeholder="Tu nombre completo" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <path d="M22 6l-10 7L2 6"/>
+                            </svg>
+                            <input type="email" id="email" placeholder="tu@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 1C6.48 1 2 5.48 2 11v10h20V11c0-5.52-4.48-10-10-10zm0 2c4.41 0 8 3.59 8 8v8H4v-8c0-4.41 3.59-8 8-8z"/>
+                                <circle cx="12" cy="16" r="2"/>
+                            </svg>
+                            <input type="password" id="password" placeholder="Mínimo 8 caracteres" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Contraseña</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 1C6.48 1 2 5.48 2 11v10h20V11c0-5.52-4.48-10-10-10zm0 2c4.41 0 8 3.59 8 8v8H4v-8c0-4.41 3.59-8 8-8z"/>
+                                <circle cx="12" cy="16" r="2"/>
+                            </svg>
+                            <input type="password" id="confirm-password" placeholder="Repite tu contraseña" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Crear Cuenta</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+                    <a href="index.html" class="back-link">← Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
