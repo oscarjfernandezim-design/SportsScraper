@@ -149,7 +149,6 @@ const OFFERS = [
   { id: 'o8', productId: 'p3', storeId: 's2', price: 110.00, currency: 'EUR', url: '#', stock: true, lastUpdated: new Date().toISOString() },
 ];
 
-let priceChart = null;
 let currentSearch = '';
 
 // ========================================
@@ -158,10 +157,20 @@ let currentSearch = '';
 function init() {
   renderProducts(PRODUCTS);
   setupSearchListeners();
-  // Show first product chart by default
-  if (PRODUCTS[0].priceHistory) {
-    updateChart(PRODUCTS[0]);
-  }
+  updateStatistics();
+}
+
+// ========================================
+// STATISTICS UPDATE
+// ========================================
+function updateStatistics() {
+  const totalProducts = PRODUCTS.length;
+  const totalStores = STORES.length;
+  const totalOffers = OFFERS.length;
+
+  document.getElementById('stat-products').textContent = new Intl.NumberFormat('es-ES').format(totalProducts);
+  document.getElementById('stat-stores').textContent = new Intl.NumberFormat('es-ES').format(totalStores);
+  document.getElementById('stat-offers').textContent = new Intl.NumberFormat('es-ES').format(totalOffers);
 }
 
 // ========================================
@@ -332,7 +341,6 @@ function renderProducts(productsToRender) {
   productsToRender.forEach(product => {
     const card = document.createElement('div');
     card.className = 'brutal-card';
-    card.onclick = () => updateChart(product);
 
     const bestOffer = OFFERS.filter(o => o.productId === product.id).sort((a, b) => a.price - b.price)[0];
     const priceDisplay = bestOffer ? `${bestOffer.price} ${bestOffer.currency}` : `${product.basePrice} EUR`;
@@ -350,79 +358,6 @@ function renderProducts(productsToRender) {
       </div>
     `;
     grid.appendChild(card);
-  });
-}
-
-function updateChart(product) {
-  const chartTitle = document.getElementById('chart-title');
-  chartTitle.innerText = `Historial de Precios: ${product.name}`;
-
-  const history = product.priceHistory || [
-    { date: '2024-01-01', price: product.basePrice },
-    { date: '2024-05-01', price: product.basePrice }
-  ];
-
-  const labels = history.map(h => h.date);
-  const data = history.map(h => h.price);
-
-  if (priceChart) {
-    priceChart.destroy();
-  }
-
-  const ctx = document.getElementById('priceChart').getContext('2d');
-  priceChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Precio (€)',
-        data: data,
-        borderColor: '#00FF00',
-        backgroundColor: 'rgba(0, 255, 0, 0.1)',
-        borderWidth: 4,
-        pointBackgroundColor: '#000',
-        pointBorderColor: '#00FF00',
-        pointBorderWidth: 2,
-        pointRadius: 6,
-        tension: 0, // Brutalist style - no curves
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: false,
-          grid: {
-            color: '#ddd',
-            lineWidth: 1
-          },
-          ticks: {
-            font: {
-              family: 'JetBrains Mono',
-              weight: 'bold'
-            }
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          },
-          ticks: {
-            font: {
-              family: 'JetBrains Mono',
-              weight: 'bold'
-            }
-          }
-        }
-      },
-      plugins: {
-        legend: {
-          display: false
-        }
-      }
-    }
   });
 }
 

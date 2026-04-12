@@ -191,6 +191,9 @@ body {
   border-bottom: 8px solid var(--brutal-black);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .hero h1 {
@@ -205,6 +208,106 @@ body {
   color: var(--neon-green);
   text-transform: uppercase;
   font-weight: bold;
+  font-size: 0.75rem;
+}
+
+/* ========================================
+   MOBILE FIRST: STATISTICS
+   ======================================== */
+.stats-section {
+  background-color: rgba(48, 46, 46, 0.5);
+  padding: 1.5rem 1rem;
+  border: 2px solid #333;
+  border-radius: 0;
+}
+
+.stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  flex: 0 1 auto;
+  text-align: center;
+  color: white;
+  padding: 1rem;
+  min-width: 120px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--neon-green);
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 50px;
+  background-color: #555;
+  margin: 0 1rem;
+}
+
+/* ========================================
+   MOBILE FIRST: SYSTEM STATUS
+   ======================================== */
+.system-status {
+  background-color: var(--soft-gray);
+  padding: 1.5rem 1rem;
+  border-left: 4px solid var(--neon-green);
+}
+
+.status-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--neon-green);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.status-text {
+  color: var(--brutal-black);
+  text-transform: uppercase;
+  font-weight: 700;
+  flex: 1;
+}
+
+.status-time {
+  color: #999;
+  text-transform: uppercase;
   font-size: 0.75rem;
 }
 
@@ -496,6 +599,22 @@ footer p {
     font-size: 0.85rem;
   }
 
+  .stats-section {
+    padding: 2rem 1rem;
+  }
+
+  .stat-item {
+    min-width: 180px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .status-content {
+    flex-wrap: nowrap;
+  }
+
   .section-title {
     font-size: 2rem;
     margin-bottom: 1.75rem;
@@ -584,6 +703,22 @@ footer p {
 
   .hero p {
     font-size: 1rem;
+  }
+
+  .stats-section {
+    padding: 2.5rem 2rem;
+  }
+
+  .stat-item {
+    min-width: 200px;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+  }
+
+  .status-content {
+    font-size: 0.95rem;
   }
 
   .container {

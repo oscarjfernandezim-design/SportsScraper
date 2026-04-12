@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SportsScraper | Comparador Brutalista</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- HEADER: CU1 - Search Interface -->
@@ -42,27 +40,38 @@
     <section class="hero">
         <h1>COMPARA PRECIOS<br>SIN RODEOS</h1>
         <p>Sistema de metabúsqueda en tiempo real para retail deportivo</p>
+
+        <!-- STATISTICS SECTION -->
+        <div class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number" id="stat-products">1,240</span>
+                    <span class="stat-label">PRODUCTOS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" id="stat-stores">5</span>
+                    <span class="stat-label">TIENDAS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" id="stat-offers">84</span>
+                    <span class="stat-label">OFERTAS HOY</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SYSTEM STATUS SECTION -->
+    <section class="system-status">
+        <div class="status-content">
+            <div class="status-dot"></div>
+            <span class="status-text">SISTEMA ONLINE: ESCANEANDO PRECIOS EN NIKE, ADIDAS, ZALANDO Y ASOS...</span>
+            <span class="status-time">ÚLTIMA ACTUALIZACIÓN: HACE 2 MIN</span>
+        </div>
     </section>
 
     <main class="container">
-        <!-- ANALYTICS SECTION -->
-        <section aria-labelledby="analytics-title">
-            <div class="section-title" id="analytics-title">
-                <span>ANALÍTICA DE PRECIOS</span>
-                <div class="section-line"></div>
-            </div>
-
-            <div class="chart-container">
-                <div class="chart-header">
-                    <h2 id="chart-title">Selecciona un producto para ver su historial</h2>
-                    <div class="neon-badge">Live Data</div>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="priceChart"></canvas>
-                </div>
-            </div>
-        </section>
-
         <!-- RESULTS/CATALOG SECTION -->
         <section aria-labelledby="catalog-title">
             <div class="section-title" id="catalog-title">
