@@ -48,5 +48,6 @@ const router = new Router();
 router.route('/', 'homePage');
 router.route('/login', 'loginPage');
 router.route('/register', 'registerPage');
+router.route('/saved', 'savedProductsPage');
 router.route('/profile', 'profilePage');
 router.route('/alerts', 'alertsPage');

@@ -1201,6 +1201,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setupProfileListeners();
       } else if (pageId === 'alertsPage') {
         setupAlertsPageListeners();
+      } else if (pageId === 'savedProductsPage') {
+        initSavedProductsPage();
       }
     }
   });
