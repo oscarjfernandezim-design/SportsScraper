@@ -441,8 +441,6 @@ function performSearch(query) {
 
   applyFilterAndSort();
 }
-  }
-}
 
 function showSearchStatus(text) {
   const statusEl = document.getElementById('search-status');
