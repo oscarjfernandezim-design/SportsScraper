@@ -1,291 +1,185 @@
-# 🌐 SportsScraper: Comparador de Ofertas Deportivas
+# 🌐 SportsScraper: Sports Deals Comparison Engine
 
-Descripción: Plataforma de metabúsqueda y comparación de precios en tiempo real para el sector retail textil. El sistema utiliza técnicas avanzadas de Web Scraping para centralizar la oferta de diversas plataformas de e-commerce, permitiendo a los usuarios optimizar sus costos mediante la transparencia de datos.
+**Description:** A real-time metasearch and price-comparison platform for the apparel retail sector. The system leverages advanced **Web Scraping** techniques to centralize product offers from multiple e-commerce platforms, allowing users to optimize costs through data transparency.
 
-### 👥 Integrantes
+---
 
-Luisa Fernanda Arenas Pachon – Código
-Juan Miguel Trujillo Garcia - 
-Oscar Javier Fernández Bernal – 1202786
+## 🧾 Commercial Version (Business Proposal)
 
-### 🎯 1. Objetivo General
+### 🚀 SportsScraper Commerce: Price Intelligence for Sports & Apparel Retail
 
-Diseñar y desarrollar un sistema integral de metabúsqueda y comparación de precios para el sector retail textil, basado en técnicas avanzadas de Web Scraping, con el fin de centralizar la oferta de diversas plataformas de e-commerce en una interfaz única que facilite la toma de decisiones informadas mediante la transparencia de datos y la optimización de costos para el usuario.
+**SportsScraper Commerce** is a **price intelligence** platform built for sportswear/apparel brands and retailers who need to monitor the market in real time, detect competitive opportunities, and optimize pricing strategy—without manually browsing dozens of stores.
 
+Instead of visiting each e-commerce site one by one, the system centralizes key data (price, sizes, shipping cost, availability, promotions) from multiple sources and displays it in a single interface, ready for analysis and decision-making.
 
-### 🌍 2. Contexto de Uso
+### ✅ Value Proposition
+- **Full market visibility:** centralized comparison of prices and stock across multiple stores.
+- **Time savings:** automates the collection of competitive data.
+- **Data-driven decisions:** adjust pricing, campaigns, and replenishment based on real trends.
+- **Smart alerts:** notifications when a competitor changes price or a product stock status changes.
+- **Price history:** daily/weekly tracking to identify patterns and seasonality.
 
-¿Quién va a usar el sistema? Consumidores de moda y ropa deportiva en Colombia que buscan comparar precios de marcas reconocidas sin navegar individualmente en cada tienda.
+### 👤 Target Customers
+- Sports retail stores
+- Sportswear & footwear brands
+- E-commerce teams / marketplace managers
+- Pricing & competitive intelligence analysts
+- Performance marketing agencies (to optimize campaigns based on price position)
 
-¿Cómo se va a utilizar el sistema? El usuario ingresa una referencia o categoría en la barra de búsqueda; el sistema consulta los motores de extracción y despliega una cuadrícula comparativa con precios, disponibilidad de tallas y enlaces directos de compra.
+### 🧩 Commercial Features (MVP+)
+**1) Competitive Dashboard**
+- Price ranking by product and by store
+- Automatic “lowest price” and “average price” detection
+- Summary views by brand/category
 
-### 📋 3. Requerimientos del Sistema
+**2) Alerts & Automation**
+- Alerts for:
+  - price drops (percentage or fixed value)
+  - stock / available sizes changes
+  - product appearance/disappearance
+- Scheduled scraping (every X hours)
 
-#### 3.1 Requerimientos Funcionales
+**3) Product Intelligence (Advanced Matching)**
+- Groups identical products even if listings use different naming conventions
+- Matching based on:
+  - brand + model
+  - SKU / reference (when available)
+  - text similarity and image similarity (optional)
 
-RF01: Extracción asíncrona de datos (precio, tallas, envío) de sitios como Zalando o Google Shopping.
+**4) Export & API**
+- Export to **CSV / Excel**
+- REST API to integrate data with:
+  - BI dashboards (Power BI / Tableau)
+  - ERP / inventory systems
+  - dynamic pricing engines
 
-RF02: Normalización de datos para unificar diferentes formatos de moneda y unidades.
+### 🔐 Compliance & Best Practices
+- Respect for robots.txt and rate limits
+- Extraction logs and traceability
+- Proxy rotation for stability (optional)
+- Ethical and responsible scraping approach
 
-RF03: Algoritmo de Product Matching para agrupar referencias idénticas de distintos proveedores.
+### 💼 Monetization Models (Examples)
+- **Monthly subscription tiers**
+  - Basic: X products / X stores / daily scraping
+  - Pro: scraping every few hours + alerts + price history
+  - Enterprise: API + integrations + dedicated deployment + support
+- **Annual B2B license**
+- **Managed service** (scraping + dashboard + reporting)
 
-RF04: Filtros avanzados por rango de precio, marca y disponibilidad de stock.
+### 🏗️ Recommended Architecture (Commercial-Grade)
+- Frontend: SPA (React/Vue) + Tailwind/Material UI
+- Backend: Node.js or Python (FastAPI)
+- Scraping: Playwright (headless) + queues (Redis/RabbitMQ)
+- Storage: PostgreSQL + event table for price history
+- Observability: logs, retries, monitoring per store
 
-#### 3.2 Requerimientos No Funcionales
-RNF01: Interfaz Responsive Design adaptada a dispositivos móviles y escritorio.
+---
 
-RNF02: Arquitectura de Single Page Application (SPA) para navegación fluida.
+## 🎯 1. General Objective
 
-RNF03: Manejo de concurrencia para soportar múltiples peticiones de scraping simultáneas.
+Design and develop an end-to-end metasearch and price-comparison system for the apparel retail sector, based on advanced web scraping techniques, in order to centralize product offers from multiple e-commerce platforms into a single interface that enables informed decision-making through data transparency and user cost optimization.
 
-RNF04: Cumplimiento de políticas de robots.txt para un scraping ético.
+---
 
-### 🧠 4. Diagramas UML
+## 🌍 2. Usage Context
 
-#### 🔍 CU1: Buscar Prenda
-El usuario busca un artículo específico para centralizar y comparar las opciones disponibles en el mercado.
+**Who will use the system?** Consumers in Colombia who shop for sportswear and fashion and want to compare prices from well-known brands without browsing each store individually.
 
-#### 🛤️ Secuencia de Pasos
-Entrada: El usuario ingresa un término (ej. "Tenis Running") en la Interfaz de Búsqueda.
+**How will it be used?** The user enters a product reference or category in the search bar; the system queries the extraction engines and displays a comparison grid with prices, size availability, and direct purchase links.
 
-Petición: La Interfaz envía la consulta al Controlador de Búsqueda.
+---
 
-Consulta: El Controlador solicita a la Base de Datos los registros que coincidan con el nombre o categoría.
+## 📋 3. System Requirements
 
-Respuesta: La Base de Datos devuelve una lista de Productos Maestros.
+### 3.1 Functional Requirements
+**FR01:** Asynchronous extraction of data (price, sizes, shipping) from sites such as Zalando or Google Shopping.  
+**FR02:** Data normalization to unify different currency formats and measurement units.  
+**FR03:** Product matching algorithm to group identical items from different providers.  
+**FR04:** Advanced filters by price range, brand, and stock availability.
 
-Salida: El Controlador organiza los resultados por relevancia y los entrega a la Interfaz para su visualización final.
+### 3.2 Non-Functional Requirements
+**NFR01:** Responsive UI adapted to mobile and desktop devices.  
+**NFR02:** Single Page Application (SPA) architecture for smooth navigation.  
+**NFR03:** Concurrency handling to support multiple simultaneous scraping requests.  
+**NFR04:** Compliance with robots.txt policies for ethical scraping.
 
+---
+
+## 🧠 4. UML Diagrams
+
+### 🔍 UC1: Search Item
+The user searches for a specific item to centralize and compare available market options.
+
+**Step Sequence**
+- **Input:** The user enters a term (e.g., “Running Shoes”) in the Search Interface.
+- **Request:** The UI sends the query to the Search Controller.
+- **Query:** The Controller requests matching records from the Database.
+- **Response:** The Database returns a list of Master Products.
+- **Output:** The Controller ranks results by relevance and returns them to the UI.
+
+```mermaid
 graph TD
-    A[Inicio] --> B[Ingresar texto de búsqueda]
-    B --> C{¿Existen resultados?}
-    C -- No --> D[Mostrar mensaje: 'No encontrado']
-    D --> E[Sugerir categorías similares]
-    C -- Sí --> F[Recuperar miniaturas y rangos de precios]
-    F --> G[Mostrar lista de resultados]
-    G --> H[Fin]
+    A[Start] --> B[Enter search text]
+    B --> C{Any results?}
+    C -- No --> D[Show message: 'Not found']
+    D --> E[Suggest similar categories]
+    C -- Yes --> F[Load thumbnails and price ranges]
+    F --> G[Show results list]
+    G --> H[End]
+```
 
-![Diagrama](img/dig_sec_1.png)
-![Diagrama](img/caso_uso_1.png)
-![Diagrama](img/dig_base_datos_1.png)
+![Diagram](img/dig_sec_1.png)  
+![Diagram](img/caso_uso_1.png)  
+![Diagram](img/dig_base_datos_1.png)
 
-#### 💰 CU2: Comparar Precios
-Funcionalidad núcleo: Permite al usuario identificar la oferta más competitiva mediante la centralización de datos de múltiples tiendas.
+### 💰 UC2: Compare Prices
+Core functionality: allows the user to identify the most competitive offer by centralizing data from multiple stores.
 
-#### 🛤️ Secuencia de Pasos
-Selección: El usuario selecciona un producto específico de la lista de resultados.
-
-Petición: La Interfaz solicita al Gestor de Comparación las ofertas vinculadas.
-
-Consulta: El Gestor filtra la tabla Ofertas mediante el ID_Producto.
-
-Respuesta: La Base de Datos retorna precios, tiendas y enlaces (Zalando, ASOS, etc.).
-
-Procesamiento: El Gestor ordena las ofertas de menor a mayor precio.
-
-Salida: La Interfaz renderiza la tabla comparativa siguiendo el diseño del prototipo de Figma.
-
+```mermaid
 graph TD
-    A[Inicio] --> B[Cargar ficha de producto]
-    B --> C[Consultar ofertas activas]
-    C --> D{¿Hay más de una tienda?}
-    D -- Sí --> E[Calcular precio mínimo]
-    E --> F[Resaltar oferta con Badge: 'Precio más bajo']
-    D -- No --> G[Mostrar precio único]
-    G --> H[Habilitar opción: 'Avisarme cuando baje']
-    F --> I[Fin]
+    A[Start] --> B[Load product details]
+    B --> C[Query active offers]
+    C --> D{More than one store?}
+    D -- Yes --> E[Compute minimum price]
+    E --> F[Highlight offer with badge: 'Lowest price']
+    D -- No --> G[Show single price]
+    G --> H[Enable option: 'Notify me when it drops']
+    F --> I[End]
     H --> I
+```
 
-![Diagrama](img/dig_sec_2.png)
-![Diagrama](img/caso_uso_2.png)
-![Diagrama](img/dig_base_datos_2.png)
+![Diagram](img/dig_sec_2.png)  
+![Diagram](img/caso_uso_2.png)  
+![Diagram](img/dig_base_datos_2.png)
 
+### 🔔 UC3: Set Price Alert
+The user wants to be proactively notified when the scraping engine detects a price drop below a specific threshold.
 
-#### 🔔 CU3: Configurar Alerta de Precio
-El usuario desea ser notificado de manera proactiva cuando el motor de scraping detecte una rebaja por debajo de un umbral específico.
-
-#### 🛤️ Secuencia de Pasos
-Interacción: El usuario hace clic en el botón "Seguir precio" dentro de la ficha del producto.
-
-Entrada: La Interfaz solicita al usuario el umbral de precio (precio objetivo) deseado para la notificación.
-
-Registro: El Gestor de Alertas crea una entrada en la tabla Alertas, vinculando el ID_Usuario con el ID_Producto.
-
-Confirmación: El sistema genera un mensaje de éxito y confirma la suscripción al usuario.
-
+```mermaid
 graph TD
-    A[Inicio] --> B[Seleccionar 'Favorito/Alerta']
-    B --> C{¿Usuario logueado?}
-    C -- No --> D[Redirigir a Registro/Login]
+    A[Start] --> B[Select 'Favorite/Alert']
+    B --> C{User logged in?}
+    C -- No --> D[Redirect to Register/Login]
     D --> B
-    C -- Sí --> E[Solicitar umbral de precio]
-    E --> F[Guardar parámetro de alerta en BD]
-    F --> G[Suscribir ID a cambios de precio]
-    G --> H[Mostrar confirmación]
-    H --> I[Fin]
+    C -- Yes --> E[Request price threshold]
+    E --> F[Save alert settings in DB]
+    F --> G[Subscribe to price changes]
+    G --> H[Show confirmation]
+    H --> I[End]
+```
 
-![Diagrama](img/dig_sec_3.png)
-![Diagrama](img/caso_uso_3.png)
-![Diagrama](img/dig_base_datos_3.png)
+![Diagram](img/dig_sec_3.png)  
+![Diagram](img/caso_uso_3.png)  
+![Diagram](img/dig_base_datos_3.png)
 
+### ⚙️ UC4: Run Extraction (Scraping)
+Backend process responsible for collecting, cleaning, and persisting data from external retail platforms.
 
-#### ⚙️ CU4: Ejecutar Extracción (Scraping)
-Proceso de backend encargado de la recolección, limpieza y persistencia de datos provenientes de las plataformas de retail externas.
-
-#### 🛤️ Secuencia de Pasos
-Disparo: El Planificador de Tareas (Cron Job) inicia el Motor de Scraping en intervalos programados.
-
-Anonimización: El Motor solicita una URL rotativa al Gestor de Proxies para evitar bloqueos por IP.
-
-Renderizado: Un Navegador Headless (como Playwright o Puppeteer) carga la página y extrae el HTML dinámico (DOM).
-
-Parsing: El Parser identifica y extrae selectores específicos para precio, stock y tallas.
-
-Validación: El Validador asegura que los datos sean íntegros (ej. que el precio sea un valor numérico positivo).
-
-Persistencia: El sistema guarda o actualiza la información en la Base de Datos central.
-
+```mermaid
 graph TD
-    A[Inicio] --> B[Acceder a URL de Tienda]
-    B --> C{¿Carga exitosa?}
-    C -- No --> D[Solicitar nuevo Proxy]
+    A[Start] --> B[Access store URL]
+    B --> C{Successful load?}
+    C -- No --> D[Request new proxy]
     D --> B
-    C -- Sí --> E[Extraer Nombre, Precio y Talla]
-    E --> F[Limpiar y Normalizar Datos]
-    F --> G{¿El precio cambió?}
-    G -- Sí --> H[Registrar en Historial y Disparar Alertas]
-    G -- No --> I[Actualizar Fecha de Verificación]
-    H --> J[Fin]
-    I --> J
-
-![Diagrama](img/dig_sec_4.png)
-![Diagrama](img/caso_uso_4.png)
-![Diagrama](img/dig_base_datos_4.png)
-
-#### 🧠 CU5: Mapear Productos (Entity Matching)
-Lógica de normalización y agrupación encargada de identificar artículos idénticos provenientes de distintas fuentes para ofrecer una comparativa unificada.
-
-#### 🛤️ Secuencia de Pasos
-Recepción: El Normalizador recibe un "Producto Extraído" (dato crudo) del motor de scraping.
-
-Búsqueda: El Normalizador solicita al Motor de Similitud buscar coincidencias potenciales en la Base de Datos.
-
-Análisis: El Motor ejecuta algoritmos de comparación de texto (como Levenstein o Jaro-Winkler) sobre los campos Marca + Modelo.
-
-Vinculación: Si el puntaje de coincidencia (score) es superior al 90%, el sistema vincula la nueva oferta al Producto Maestro ya existente.
-
-Creación: Si no se detectan coincidencias suficientes, se genera un nuevo registro de Producto Maestro en el catálogo.
-
-graph TD
-    A[Inicio] --> B[Recibir dato crudo del Scraper]
-    B --> C[Comparar Marca + Modelo con BD]
-    C --> D{¿Similitud > 90%?}
-    D -- Sí --> E[Vincular oferta al ID existente]
-    E --> F[Actualizar rango de precios]
-    D -- No --> G[Crear nueva categoría de Producto Maestro]
-    G --> H[Asignar ID único de visualización]
-    F --> I[Fin]
-    H --> I
-
-![Diagrama](img/dig_sec_5.png)
-![Diagrama](img/caso_uso_5.png)
-![Diagrama](img/dig_base_datos_5.png)
-
-### 🎨 5. URL del Prototipo
-
-Se ha diseñado una interfaz moderna y deportiva centrada en la facilidad de navegación.
-
-<p align="center">
-  <img src="assets/figma-preview.png" width="600" title="Vista previa del prototipo en Figma">
-</p>
-
-[Ver prototipo completo en Figma](https://www.figma.com/proto/c4HlNcBL0y6i2YNKr1lmiO/SportsScraper?node-id=1-5&starting-point-node-id=1%3A5)
-
-### 🗄️ 6. Diseño de Base de Datos
-
-El sistema utiliza una arquitectura de base de datos relacional (RDBMS) diseñada para gestionar la alta volatilidad de precios y permitir la unificación de productos (Entity Matching) desde múltiples fuentes.
-
-<p align="center">
-<img src="img/image_816388.png" alt="Modelo Entidad-Relación" width="80%">
-</p>
-
-<table align="center">
-<tr>
-<th bgcolor="#1a1a1a"><font color="white">Entidad</font></th>
-<th bgcolor="#1a1a1a"><font color="white">📍 Función en el Sistema</font></th>
-<th bgcolor="#1a1a1a"><font color="white">🔑 Atributos Clave</font></th>
-</tr>
-<tr>
-<td><b>Producto_Maestro</b></td>
-<td>Centraliza la información única de una prenda para evitar duplicidad.</td>
-<td><code>ID_Producto</code>, <code>Nombre</code>, <code>Marca</code></td>
-</tr>
-<tr>
-<td><b>Ofertas</b></td>
-<td>Almacena los datos dinámicos (precios) capturados por el scraper.</td>
-<td><code>Precio</code>, <code>Stock</code>, <code>URL_Tienda</code></td>
-</tr>
-<tr>
-<td><b>Tiendas</b></td>
-<td>Catálogo de plataformas indexadas (Zalando, Adidas, etc.).</td>
-<td><code>ID_Tienda</code>, <code>Nombre</code>, <code>Logo_URL</code></td>
-</tr>
-<tr>
-<td><b>Usuarios</b></td>
-<td>Gestión de perfiles y credenciales para personalización.</td>
-<td><code>ID_Usuario</code>, <code>Email</code>, <code>Password</code></td>
-</tr>
-<tr>
-<td><b>Alertas</b></td>
-<td>Vincula usuarios con productos para seguimiento de rebajas.</td>
-<td><code>ID_Alerta</code>, <code>Precio_Objetivo</code></td>
-</tr>
-</table>
-
-<p align="center">
-<i><b>Nota Técnica:</b> Se implementó una relación 1:N entre Producto y Ofertas para permitir comparativas multi-tienda en tiempo real.</i>
-</p>
-
-### 🧩 7. Documentación del Sistema
-/css: Estilos modulares y variables de diseño (Layout, Colores).
-
-/img: Contiene imagenes del proyecto
-
-/js: Lógica del Scraper, manipulación del DOM y consumo de APIs.
-
-/assets: Recursos gráficos, iconos y logos vectoriales.
-
-### 🚀 8. Instalación y Vista Previa
-Debido a que el proyecto se encuentra en su fase de Prototipado de Alta Fidelidad (Frontend), no se requieren instalaciones complejas de servidor o bases de datos para visualizar la interfaz.
-
-<table align="center">
-<tr>
-<th bgcolor="#1a1a1a"><font color="white">Paso</font></th>
-<th bgcolor="#1a1a1a"><font color="white">📂 Acción</font></th>
-<th bgcolor="#1a1a1a"><font color="white">💻 Instrucción</font></th>
-</tr>
-<tr>
-<td align="center"><b>1</b></td>
-<td><b>Descarga</b></td>
-<td>Clonar el repositorio o descargar el archivo <code>.zip</code> del proyecto.</td>
-</tr>
-<tr>
-<td align="center"><b>2</b></td>
-<td><b>Descompresión</b></td>
-<td>Extraer los archivos asegurando que las carpetas <code>/css</code> y <code>/assets</code> mantengan su posición.</td>
-</tr>
-<tr>
-<td align="center"><b>3</b></td>
-<td><b>Ejecución</b></td>
-<td>Abrir el archivo <code>index.html</code> en cualquier navegador moderno (Chrome, Edge, Firefox).</td>
-</tr>
-</table>
-
-🛠️ Especificaciones Técnicas del Front
-Estructura: HTML5 Semántico.
-
-Estilos: CSS3 con arquitectura modular (vinculado en el < head>).
-
-Interactividad: JavaScript ES6 para simulaciones de filtrado y navegación.
-
-Assets: Iconografía y recursos optimizados en formato SVG/PNG.
+    C
